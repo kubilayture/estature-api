@@ -40,12 +40,13 @@ export const updateUser = async (req, res) => {
     const updatedUser = await prisma.user.update({
       where: { id },
       data: {
-        ...inputs,
+        ...input,
         ...(updatedPassword && { password: updatedPassword }),
         ...(avatar && { avatar }),
       }
     });
-    res.status(200).json(updatedUser);
+    const { password: userPassword, ...rest } = updatedUser;
+    res.status(200).json(rest);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Failed to update user' });
@@ -65,6 +66,6 @@ export const deleteUser = async (req, res) => {
     res.status(200).json({ message: 'User deleted' });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Failed to update user' });
+    res.status(500).json({ message: 'Failed to delete user' });
   }
 };
