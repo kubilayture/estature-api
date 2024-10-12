@@ -56,7 +56,7 @@ export const login = async (req, res) => {
 
     const { password: userPassword, ...userInfo } = user;
 
-    res
+    return res
       .cookie("token", token, {
         httpOnly: true,
         // secure:true,
@@ -66,9 +66,9 @@ export const login = async (req, res) => {
       .json(userInfo);
 
   } catch (error) {
-    res.status(500).json({ message: 'Failed to login' });
+    return res.status(500).json({ message: 'Failed to login' });
   }
 };
 export const logout = (req, res) => {
-  res.clearCookie("token").status(200).json({ message: "Logged out successfully" });
+  return res.clearCookie("token").status(200).json({ message: "Logged out successfully" });
 };
