@@ -9,7 +9,7 @@ export const getPosts = async (req, res) => {
         type: query.type || undefined,
         property: query.property || undefined,
         bedroom: {
-          gte: parseInt(query.bedroom) || undefined,
+          gte: parseInt(query.bedroom) || 0,
         },
         price: {
           gte: parseInt(query.minPrice) || 0,
